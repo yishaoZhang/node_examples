@@ -2,6 +2,7 @@
 + commonJS 模块规范， AMD 模块规范
 + node require原理（原码）
 + node 特性及代码更新
++ require 查找文件规则
 
 ## js模块 ##
 + commonJS
@@ -81,7 +82,10 @@ function $require(id) {
     + 如何清？
         + require.cache[moduleName]的方式来操作cache
         + require.cache[moduleName] 保持着对module cache的引用，而非缓存本身
-+ 生产环境一般使用 pm2
+    + require.resolve(id) // 可以返回文件的绝对路径
+        + 因此清除写法亦可如下：
+            + delete require.cache(require.resolve(id))
++ 生产环境一般使用 pm2, ??
 ```
 // require.cache[moduleName]清缓存 示意
 setTimeout(function(){
@@ -91,3 +95,15 @@ setTimeout(function(){
     var oneClass = require('./modules/oneClass');
 }, 1000)
 ```
+
+## require 查找文件规则 ##
++ 以./ ../ 或 /开头（./ ../ 相对路径， /绝对路径）
+    + 文件夹（其权限大于带后缀文件名）
+        + 默认index.js
+        + package.json{main: 'str'} main路径存在，则main路径下的文件 权限大于 index.js
+        + 接上可配相关依赖 
+    + 无后缀 （权限小于同名文件夹） 
+        + .js > .json > .node
++ 无/(filename, not srcc)
+    + 系统自带
+    + node_modules
