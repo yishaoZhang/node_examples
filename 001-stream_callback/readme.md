@@ -1,7 +1,7 @@
 ## 了解 ##
 + util 模块
 + stream 模块
-+ 流事件/pipe事件
++ 流事件/pipe方法
 
 ## 学习 ##
 + util.inherits 原理
