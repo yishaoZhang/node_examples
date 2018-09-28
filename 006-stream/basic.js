@@ -43,6 +43,9 @@ http.createServer(function(req, res) {
     readStream.on('ready', () => {
         console.log('ready');
     })
+    readStream.on('readable', (chunk) => {
+        console.log('readable', chunk);
+    })
     readStream.on('data', (chunk) => {
         console.log('data', chunk);
     })
