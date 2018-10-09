@@ -11,6 +11,7 @@
     + util.isDate(object)
     + util.isError(object) // 是否为error对象
 + CountStream 承继 Writable 后，实例做为 callback 放在pipe // 重要，十分重要
++ CountStream 构造函数通过util.inherits 继承可写流后，相关流事件将会触发 CountStream prototype 同名方法。。如end ???? 
 + eventEmitter 传参
 + 复用 assort 原始测试的一般写法
 ```

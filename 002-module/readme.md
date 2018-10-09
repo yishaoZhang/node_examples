@@ -105,5 +105,10 @@ setTimeout(function(){
     + 无后缀 （权限小于同名文件夹） 
         + .js > .json > .node
 + 无/(filename, not srcc)
-    + 系统自带
-    + node_modules
+    + 以当前目录为基准向上查找，如果当前目录及父级以上存在「node_modules」即可
+    + 通过命令 process.mainModule.paths 可查看所有醒找路径
+    + mac 系统可以通过 which 'moduleName' 查看module全局安装路径
+        + 上述命令不准
+            + cnpm ls -g --depth 0
+            + 注意打印省略 node_modules
++ 如何更改 npm 全局安装路径配置？？？
